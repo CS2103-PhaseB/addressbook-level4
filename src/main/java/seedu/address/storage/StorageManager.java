@@ -88,11 +88,5 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-
-    @Override
-     public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-                saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath() + "-backup.xml");
-     }
-
-
+    
 }

@@ -2,14 +2,11 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
@@ -100,11 +97,10 @@ public class ModelManager extends ComponentManager implements Model {
         ObservableList<ReadOnlyPerson> reverseOrderPersonList = FXCollections.observableArrayList();
 
         int index = filteredPersons.size() - 1;
-        int j = 0;
-        for(int i = index; i > -1; i--){
+        for (int i = index; i > -1; i--) {
 
             reverseOrderPersonList.add(filteredPersons.get(i));
-            j++;
+
         }
 
         return new FilteredList<ReadOnlyPerson>(reverseOrderPersonList);
@@ -118,7 +114,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void UpdateReversePersonList(Predicate<ReadOnlyPerson> predicate) {
+    public void updateReversePersonList(Predicate<ReadOnlyPerson> predicate) {
 
         requireNonNull(predicate);
         filteredPersons = getReverseOrderPersonList();
