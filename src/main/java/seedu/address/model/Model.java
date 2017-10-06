@@ -69,5 +69,4 @@ public interface Model {
      */
     void UpdateReversePersonList(Predicate<ReadOnlyPerson> predicate);
 
-    
 }
