@@ -16,14 +16,14 @@ public class ResortCommandTest {
 
     private Model model;
     private Model expectedModel;
-    private resortCommand resortCommand;
+    private ResortCommand resortCommand;
 
     @Before
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        resortCommand = new resortCommand();
+        resortCommand = new ResortCommand();
         resortCommand.setData(model, new CommandHistory(), new UndoRedoStack());
     }
 

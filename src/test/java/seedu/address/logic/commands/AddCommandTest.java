@@ -142,7 +142,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void UpdateReversePersonList(Predicate<ReadOnlyPerson> predicate) {
+        public void updateReversePersonList(Predicate<ReadOnlyPerson> predicate) {
             fail("This method should not be called.");
         }
     }
