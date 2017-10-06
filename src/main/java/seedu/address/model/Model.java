@@ -64,5 +64,9 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate);
 
+    /**
+     * Updates the filter of the filtered person list to reversed order
+     */
     void UpdateReversePersonList(Predicate<ReadOnlyPerson> predicate);
+
 }
