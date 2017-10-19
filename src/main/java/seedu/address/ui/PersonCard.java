@@ -27,14 +27,14 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static String[] colors = { "red", "orange", "yellow", "green", "blue", "purple"};
+    private static String[] colors = { "#ff8080", "#009999", "#4da6ff", "#ff9933", "#00e68a", "#ff80ff", "grey" };
     private static HashMap<String, String> colorMapping = new HashMap<String, String>();
+    private static Random random = new Random();
 
     public final ReadOnlyPerson person;
 
     private final Logic logic;
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
-
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -43,13 +43,6 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    private static String[] colors = { "#ff8080", "#009999", "#4da6ff", "#ff9933", "#00e68a", "#ff80ff", "grey" };
-    private static HashMap<String, String> tagColors = new HashMap<String, String>();
-    private static Random random = new Random();
-
-    public final ReadOnlyPerson person;
-
 
     @FXML
     private HBox cardPane;
@@ -80,11 +73,11 @@ public class PersonCard extends UiPart<Region> {
 
     private static String getColorForTag(String tagValue) {
 
-        if (!tagColors.containsKey(tagValue)) {
-            tagColors.put(tagValue, colors[random.nextInt(colors.length)]);
+        if (!colorMapping.containsKey(tagValue)) {
+            colorMapping.put(tagValue, colors[random.nextInt(colors.length)]);
         }
 
-        return tagColors.get(tagValue);
+        return colorMapping.get(tagValue);
     }
 
     /**
@@ -125,9 +118,7 @@ public class PersonCard extends UiPart<Region> {
             tagLabel.setStyle("-fx-background-color: " + getColorForTag(tag.tagName));
             tags.getChildren().add(tagLabel);
         });
-            tagLabel.setStyle("-fx-background-color: " + mapTagToColor(tag.tagName));
-            tags.getChildren().add(tagLabel);
-        });
+
         //person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
