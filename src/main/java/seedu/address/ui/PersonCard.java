@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.HashMap;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
@@ -27,14 +26,14 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static String[] colors = { "red", "orange", "yellow", "green", "blue", "purple"};
+    private static String[] colors = { "#ff8080", "#009999", "#4da6ff", "#ff9933", "#00e68a", "#ff80ff", "grey" };
     private static HashMap<String, String> colorMapping = new HashMap<String, String>();
 
     public final ReadOnlyPerson person;
 
+    private final int cardNum;
     private final Logic logic;
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
-
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -43,13 +42,6 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    private static String[] colors = { "#ff8080", "#009999", "#4da6ff", "#ff9933", "#00e68a", "#ff80ff", "grey" };
-    private static HashMap<String, String> tagColors = new HashMap<String, String>();
-    private static Random random = new Random();
-
-    public final ReadOnlyPerson person;
-
 
     @FXML
     private HBox cardPane;
@@ -66,25 +58,20 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label score;
+    @FXML
     private FlowPane tags;
 
-
+    //@@author Jacob Vosburgh
     public PersonCard(ReadOnlyPerson person, int displayedIndex, Logic inlogic) {
         super(FXML);
         this.person = person;
         logic = inlogic;
-        id.setText(displayedIndex + ". ");
+        //@@author Jacob Vosburgh
+        cardNum = displayedIndex;
+        id.setText(cardNum + ". ");
         initTags(person);
         bindListeners(person);
-    }
-
-    private static String getColorForTag(String tagValue) {
-
-        if (!tagColors.containsKey(tagValue)) {
-            tagColors.put(tagValue, colors[random.nextInt(colors.length)]);
-        }
-
-        return tagColors.get(tagValue);
     }
 
     /**
@@ -108,6 +95,7 @@ public class PersonCard extends UiPart<Region> {
         phone.textProperty().bind(Bindings.convert(person.phoneProperty()));
         address.textProperty().bind(Bindings.convert(person.addressProperty()));
         email.textProperty().bind(Bindings.convert(person.emailProperty()));
+        score.textProperty().bind(Bindings.convert(person.scoreProperty()));
         person.tagProperty().addListener((observable, oldValue, newValue) -> {
             tags.getChildren().clear();
             initTags(person);
@@ -122,9 +110,6 @@ public class PersonCard extends UiPart<Region> {
     private void initTags(ReadOnlyPerson person) {
         person.getTags().forEach(tag -> {
             Label tagLabel = new Label(tag.tagName);
-            tagLabel.setStyle("-fx-background-color: " + getColorForTag(tag.tagName));
-            tags.getChildren().add(tagLabel);
-        });
             tagLabel.setStyle("-fx-background-color: " + mapTagToColor(tag.tagName));
             tags.getChildren().add(tagLabel);
         });
@@ -142,7 +127,6 @@ public class PersonCard extends UiPart<Region> {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof PersonCard)) {
             return false;
@@ -153,6 +137,7 @@ public class PersonCard extends UiPart<Region> {
         return id.getText().equals(card.id.getText())
                 && person.equals(card.person);
     }
+    //@@author Jacob Vosburgh
 
     /**
      * handles button events given to it by the fxml doc that it is set as controller for by the constructor in UiPart
@@ -161,9 +146,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private void handleDeleteButtonAction(ActionEvent buttonEvent) {
         try {
+            CommandResult commandResult = new CommandResult("");
             String justIndex = id.getText().substring(0, id.getText().length() - 2);
             String delCommand = "delete " + justIndex;
-            CommandResult commandResult = logic.execute(delCommand);
+            //@@author
+            if (logic.getCurrentList().contains("favlist")) {
+                commandResult = new CommandResult("Delete command does not work in favourite list");;
+            } else {
+                commandResult = logic.execute(delCommand);
+            }
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
         } catch (CommandException | ParseException e) {
@@ -171,6 +162,24 @@ public class PersonCard extends UiPart<Region> {
             logger.info("Delete call failed on index " + id.getText());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
+    }
 
+    /**
+     * handles edit button presses, triggering a new window.
+     * @param buttonEvent
+     */
+    @FXML
+    private void handleEditButtonAction(ActionEvent buttonEvent) {
+        CommandResult commandResult = new CommandResult("");
+        if (logic.getCurrentList().contains("favlist")) {
+            commandResult = new CommandResult("Edit command does not work in favourite list");;
+        } else {
+            //@@author Jacob Vosburgh
+            EditWindow editWindow = new EditWindow(logic, cardNum);
+            editWindow.show();
+        }
+        logger.info("Result: " + commandResult.feedbackToUser);
+        raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+        //@@author
     }
 }
