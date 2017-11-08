@@ -68,6 +68,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+// tag::addButton[]
+=== Adding a person via 'Add' button
+
+Clicking the button opens a prompt to enter details for a person. Filling in those details and clicing 'Add'
+will add the new person to the list. Tags need only be separated by spaces, and the prompt informs you which
+details are optional.
+// end::addButton[]
 === Listing all persons : `list` or `l`
 
 Shows a list of all persons in the address book. +
@@ -105,7 +112,7 @@ Examples:
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
+// tag::editButton[]
 === Editing a person via 'Edit' button
 
 Edits an existing person in the address book. +
@@ -119,7 +126,7 @@ Window remains open until dismissed to allow multiple edits quickly.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * Only One tag can currently be added via the 'Edit' button. For more, use the command line.
 ****
-
+// end::editButton[]
 === Locating persons by name: `find` or `f`
 
 Finds persons whose names or tags contain any of the given keywords. +
@@ -166,7 +173,7 @@ Deletes the 2nd person in the address book.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
-
+// tag::deleteButton[]
 === Deleting a person : via 'Delete' button
 
 Deletes the associated person from the address book.
@@ -175,7 +182,7 @@ Can be undone using `undo` normally.
 ****
 * Deletes the person
 ****
-
+// end::deleteButton[]
 === Selecting a person : `select` or `s`
 
 Selects the person identified by the index number used in the last person listing. +
@@ -251,7 +258,6 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
 === Undoing previous command : `undo` or `u`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
@@ -278,16 +284,17 @@ The `undo` command fails as there are no undoable commands executed previously.
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
-
+// tag::undoRedo
 === Undoing previous command via 'Undo' button
 
 Restores the address book to the state before the previous _undoable_ command was executed.
+Fails if there are no undoable commands executed previously.
 
 [NOTE]
 ====
 Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
 ====
-
+// end::undoRedo
 === Redoing the previously undone command : `redo` or `r`
 
 Reverses the most recent `undo` command. +
@@ -310,12 +317,12 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `u` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `r` (reapplies the `clear` command) +
-
+// tag::undoRedo
 === Redoing the previously undone command via 'Redo' button
 
 Reverses the most recent `undo` command or button press.
 Fails if no `undo` commands have executed or 'Undo' has not been pressed.
-// end::undoredo[]
+// end::undoRedo[]
 
 === Clearing all entries : `clear` or `c`
 
