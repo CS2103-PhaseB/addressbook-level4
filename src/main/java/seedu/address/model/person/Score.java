@@ -18,10 +18,9 @@ public class Score {
 
     public Score(String score) throws IllegalValueException {
         requireNonNull(score);
-        if(score.equals("")){
+        if (score.equals("")) {
             this.value = score;
-        }
-        else {
+        } else {
             String filteredScore = score.replaceAll("[^\\d]", "");
             if (!isValidScore(filteredScore)) {
                 throw new IllegalValueException(MESSAGE_SCORE_CONSTRAINTS);
@@ -30,8 +29,12 @@ public class Score {
         }
     }
 
-    public boolean isValidScore(String value) {
-        return value.matches(SCORE_VALIDATION_REGEX);
+    /**
+     *Returns true if given string is a valid score.
+     */
+    public static boolean isValidScore(String value) {
+        String copy = value.replaceAll("[^\\d]", ""); //For testing purposes
+        return copy.matches(SCORE_VALIDATION_REGEX);
     }
 
     @Override
