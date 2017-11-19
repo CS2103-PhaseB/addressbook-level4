@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-//@@author LinusMelb
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_WEB_IMAGE_URL_A;
@@ -10,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_WEB_IMAGE_URL_A
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEB_IMAGE_URL_B;
 
 import org.junit.Test;
+
+//@@author LinusMelb
 
 public class AvatarTest {
     @Test

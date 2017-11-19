@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-//@@author LinusMelb
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.AddAvatarCommand.MESSAGE_UPDATE_AVATAR_PIC_SUCCESS;

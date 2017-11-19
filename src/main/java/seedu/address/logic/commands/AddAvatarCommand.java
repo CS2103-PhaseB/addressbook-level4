@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-//@@author LinusMelb
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IMAGE_URL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -34,7 +33,6 @@ public class AddAvatarCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the avatar picture of the person identified "
             + "by the index number. "
-            + "Existing avatar picture will be replaced by the new picture.\n"
             + "Parameters: INDEX of person (positive integer) "
             + "[u/image URL]\n"
             + "Example of using online image: " + COMMAND_WORD + " 1 "
@@ -53,6 +51,7 @@ public class AddAvatarCommand extends Command {
 
     private final Index index;
     private final Avatar avatar;
+
 
     /**
      *
@@ -98,6 +97,7 @@ public class AddAvatarCommand extends Command {
                 }
             }
 
+            //@@author LinusMelb
             if (personToUpdateAvatarPic.getAvatarPic().toString() != "") {
 
                 /*
@@ -120,7 +120,7 @@ public class AddAvatarCommand extends Command {
             } else {
                 throw new CommandException(MESSAGE_NOT_UPDATED);
             }
-
+            //@@author
 
             if (!Files.exists(Paths.get(newFile))) {
                 try {
