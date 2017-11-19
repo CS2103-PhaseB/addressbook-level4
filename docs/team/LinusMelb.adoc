@@ -10,6 +10,8 @@ UniBook is a desktop address book application used for manage your uni friends i
 
 === Enhancement Added: Avatar Command
 
+Reused some code from [https://github.com/CS2103AUG2017-T11-B1/main/pull/116[soonwj]]
+
 ==== External behavior
 
 ---

@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-//@@author LinusMelb
 import static java.util.Objects.requireNonNull;
 
 import java.awt.Image;
@@ -9,6 +8,8 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+
+//@@author LinusMelb
 
 /**
  * Represents a Person's avatar picture in the address book.
@@ -19,6 +20,8 @@ public class Avatar {
     public static final String MESSAGE_AVATAR_PIC_EXPIRED =
             "This avatar is invalid, select another image URL";
     public static final String DEFAULT_URL = "http://139.59.227.237/public/default.jpg";
+
+    //@@author
 
     /*
      * The first character of the address must not be a whitespace
@@ -36,6 +39,8 @@ public class Avatar {
      *
      * @throws IllegalValueException if given AvatarPic string is invalid.
      */
+
+    //@@author LinusMelb
     public Avatar(String url) throws IllegalValueException {
         requireNonNull(url);
 
@@ -59,6 +64,7 @@ public class Avatar {
 
         source = url;
     }
+    //@@author
 
     /**
      * Returns true if a given string is a valid image URL.

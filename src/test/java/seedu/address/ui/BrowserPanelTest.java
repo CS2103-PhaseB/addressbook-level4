@@ -43,11 +43,10 @@ public class BrowserPanelTest extends GuiUnitTest {
     //@@author LinusMelb
     @Test
     public void display() throws Exception {
-        // default web page
+
         URL expectedDefaultPageUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         assertEquals(expectedDefaultPageUrl, browserPanelHandle.getLoadedUrl());
 
-        // associated web page of a person
         postNow(selectionChangedEventStub);
 
         URL expectedPersonUrl = MainApp.class.getResource(FXML_FILE_FOLDER + BROWSER_PAGE);;
